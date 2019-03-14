@@ -26,16 +26,32 @@ def submit_predictions(config_file, df):
 
     """
     """
+    
+    columns = [
+        'customer',
+        'date',
+        'billing',
+    ]
+    for col in columns:
+        if col not in df.columns:
+            raise ValueError(
+                f"Column {col} is missing from dataframe."
+            )
+
+    if df.shape[1] != 3:
+        raise ValueError(
+            f"Wrong number of columns, should be 3."
+        )
 
     if df.empty:
-        return("you passed an empty dataframe")
+        raise ValueError("you passed an empty dataframe")
 
     total_customer = 3 #1000
     if len(df.customer) < total_customer:
-        return("you have less customer than needed")
+        raise ValueError("you have less customer than needed")
 
     if len(df.customer) != len(df.customer.unique()):
-        return("you have non-unique customer")
+        raise ValueError("you have non-unique customer")
 
     config = cfg.ConfigParser()
     config.read(config_file)
