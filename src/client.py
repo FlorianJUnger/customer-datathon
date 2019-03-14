@@ -30,12 +30,12 @@ def submit_predictions(config_file, df):
     if df.empty:
         return("you passed an empty dataframe")
 
-    total_customer = 3 #1000
-    if len(df.customer) < total_customer:
-        return("you have less customer than needed")
+    total_customer = 1190 # total number of rows in the validation set
+    if len(df.customer) != total_customer:
+        return("You have less customers than needed, total should be {}".format(total_customer))
 
     if len(df.customer) != len(df.customer.unique()):
-        return("you have non-unique customer")
+        return("You have non-unique customers, check your duplicates.")
 
     config = cfg.ConfigParser()
     config.read(config_file)
