@@ -46,7 +46,7 @@ def submit_predictions(config_file, df):
     if df.empty:
         raise ValueError("you passed an empty dataframe")
 
-    total_customer = 3 #1000
+    total_customer = 1190 # total number of rows in the validation set
     if len(df.customer) < total_customer:
         raise ValueError("you have less customer than needed")
 
